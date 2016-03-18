@@ -28,6 +28,11 @@ namespace GameOfLife
             return GetCellAtLocation(livingCellLocationDict, loc);
         }
 
+        public ICell GetCellAtLocation(int x, int y)
+        {
+            return GetCellAtLocation(livingCellLocationDict, new Location(x,y));
+        }
+
         public void SetLivingCellsAtLocations(List<Location> locs)
         {
             foreach (Location loc in locs)
@@ -53,6 +58,12 @@ namespace GameOfLife
 		{
 			livingCellLocationDict[loc] =  new LivingCell();
 		}
+
+        public void SetLivingCellAtLocation(int x, int y)
+        {
+            Location loc = new Location(x,y);
+            livingCellLocationDict[loc] = new LivingCell();
+        }
 
         public void SetLivingCellAtLocation(Dictionary<Location, ICell> livingLocationDict, Location loc)
         {

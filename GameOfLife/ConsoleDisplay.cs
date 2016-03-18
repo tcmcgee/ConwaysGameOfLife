@@ -8,7 +8,6 @@ namespace GameOfLife
         private int shiftX = 0;
         private int shiftY = 0;
 
-
         public void DisplayWorld()
         {
             Console.WriteLine("");
@@ -33,8 +32,7 @@ namespace GameOfLife
             {
                 for (int cols = shiftY; cols < numCols; cols++)
                 {
-                    Location loc = new Location(rows, cols);
-                    grid[rows - shiftX, cols - shiftY] = world.GetCellAtLocation(loc).ToString();
+                    grid[rows - shiftX, cols - shiftY] = world.GetCellAtLocation(rows ,cols).ToString();
                 }
             }
         }
