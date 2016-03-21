@@ -45,9 +45,7 @@ namespace GameOfLife
         {
             ICell cell;
             bool found = livingCellDict.TryGetValue(location, out cell);
-            if (found)
-            { }
-            else
+            if (!found)
             {
                 cell = new DeadCell();
             }
@@ -55,14 +53,8 @@ namespace GameOfLife
         }
 
         public void SetLivingCellAtLocation(Location loc)
-		{
-			livingCellLocationDict[loc] =  new LivingCell();
-		}
-
-        public void SetLivingCellAtLocation(int x, int y)
         {
-            Location loc = new Location(x,y);
-            livingCellLocationDict[loc] = new LivingCell();
+            SetLivingCellAtLocation(livingCellLocationDict, loc);
         }
 
         public void SetLivingCellAtLocation(Dictionary<Location, ICell> livingLocationDict, Location loc)
@@ -105,13 +97,10 @@ namespace GameOfLife
                 foreach(Location neighborLocation in neighbors)
                 {
                     ICell neighborCell = GetCellAtLocation(neighborLocation);
-                    if (neighborCell.IsAlive())
-                    { }   
-                    else
+                    if (!neighborCell.IsAlive())
                     {
                         if (neighborCell.IsAliveNextGeneration(GetLivingNeighborsLocations(neighborLocation)))
                         {
-
                             SetLivingCellAtLocation(nextGenLivingCellLocationDict, neighborLocation);
                         }
                     }

@@ -83,19 +83,19 @@ namespace GameOfLife
         {
             if (userInput.Key.ToString() == "DownArrow")
             {
-                consoleDisplay.IncrementShiftX();
+                consoleDisplay.ShiftGridViewDown();
             }
             else if (userInput.Key.ToString() == "UpArrow")
             {
-                consoleDisplay.DecrementShiftX();
+                consoleDisplay.ShiftGridViewUp();
             }
             else if (userInput.Key.ToString() == "RightArrow")
             {
-                consoleDisplay.IncrementShiftY();
+                consoleDisplay.ShiftGridViewRight();
             }
             else if (userInput.Key.ToString() == "LeftArrow")
             {
-                this.consoleDisplay.DecrementShiftY();
+                this.consoleDisplay.ShiftGridViewLeft();
             }
         }
 

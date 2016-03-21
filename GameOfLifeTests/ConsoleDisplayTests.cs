@@ -26,7 +26,7 @@ namespace GameOfLife.Tests
             World world = new World();
             ConsoleDisplay consoleDisplay = new ConsoleDisplay();
 
-            world.SetLivingCellAtLocation(0, 0);
+            world.SetLivingCellAtLocation(new Location(0,0));
             consoleDisplay.GetStringGrid(world);
             string[,] grid = consoleDisplay.GetGrid();
 
@@ -39,9 +39,9 @@ namespace GameOfLife.Tests
             World world = new World();
             ConsoleDisplay consoleDisplay = new ConsoleDisplay();
 
-            world.SetLivingCellAtLocation(0, 0);
+            world.SetLivingCellAtLocation(new Location(0,0));
             consoleDisplay.GetStringGrid(world);
-            consoleDisplay.IncrementShiftX();
+            consoleDisplay.ShiftGridViewDown();
             string[,] grid = consoleDisplay.GetGrid();
 
             Assert.AreEqual(livingCellString, grid[0, 0]);

@@ -5,34 +5,35 @@ namespace GameOfLife
     public class ConsoleDisplay
     {
         private string[,] grid = new string[10, 10];
-        private int shiftX = 0;
-        private int shiftY = 0;
+        private int ShiftY = 0;
+        private int ShiftX = 0;
 
         public void DisplayWorld()
         {
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("");
+            Console.WriteLine("");
             for (int rows = 0; rows < grid.GetLength(0); rows++)
             {
-                Console.WriteLine(new string('-', grid.GetLength(1) * 4));
                 for (int cols = 0; cols < grid.GetLength(1); cols++)
                 {
                     Console.Write(grid[rows, cols] + " | ");
                 }
                 Console.WriteLine("");
+                Console.WriteLine(new string('-', grid.GetLength(1) * 4));
             }
         }
 
         public void GetStringGrid(World world)
         {
-            int numRows = grid.GetLength(0) + shiftX;
-            int numCols = grid.GetLength(1) + shiftY;
-            for (int rows = shiftX; rows < numRows; rows++)
+            int numRows = grid.GetLength(0) + ShiftY;
+            int numCols = grid.GetLength(1) + ShiftX;
+            for (int rows = ShiftY; rows < numRows; rows++)
             {
-                for (int cols = shiftY; cols < numCols; cols++)
+                for (int cols = ShiftX; cols < numCols; cols++)
                 {
-                    grid[rows - shiftX, cols - shiftY] = world.GetCellAtLocation(rows ,cols).ToString();
+                    grid[rows - ShiftY, cols - ShiftX] = world.GetCellAtLocation(rows ,cols).ToString();
                 }
             }
         }
@@ -44,32 +45,32 @@ namespace GameOfLife
 
         public int GetShiftX()
         {
-            return shiftX;
+            return ShiftY;
         }
 
         public int GetShiftY()
         {
-            return shiftY;
+            return ShiftX;
         }
 
-        public void DecrementShiftY()
+        public void ShiftGridViewLeft()
         {
-            shiftY--;
+            ShiftX--;
         }
 
-        public void IncrementShiftY()
+        public void ShiftGridViewRight()
         {
-            shiftY++;
+            ShiftX++;
         }
 
-        public void DecrementShiftX()
+        public void ShiftGridViewUp()
         {
-            shiftX--;
+            ShiftY--;
         }
 
-        public void IncrementShiftX()
+        public void ShiftGridViewDown()
         {
-            shiftX++;
+            ShiftY++;
         }
     }
 
