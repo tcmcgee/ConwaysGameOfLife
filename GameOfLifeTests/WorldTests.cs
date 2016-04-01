@@ -13,6 +13,7 @@ namespace GameOfLife.Tests
             ICell cell = world.GetCellAtLocation(new Location(0, 0));
             Assert.IsFalse(cell.IsAlive());
         }
+
         [TestMethod()]
         public void SetCellAliveAtLocationTest()
         {
@@ -25,13 +26,14 @@ namespace GameOfLife.Tests
 
             Assert.IsTrue(cell.IsAlive());
         }
-         [TestMethod()]
-         public void GetsEmptyLivingNeighborsList()
+
+        [TestMethod()]
+        public void GetsEmptyLivingNeighborsList()
         {
             World world = new World();
 
             List<Location> livingNeighborsLocations = world.GetLivingNeighborsLocations(new Location(1, 1));
-   
+
             Assert.AreEqual(0, livingNeighborsLocations.Count);
         }
 
@@ -40,10 +42,9 @@ namespace GameOfLife.Tests
         {
             World world = new World();
             Location loc = new Location(1, 1);
-            
+
             world.SetLivingCellAtLocation(new Location(1, 2));
             List<Location> livingNeighborsLocations = world.GetLivingNeighborsLocations(loc);
-            
 
             Assert.AreEqual(1, livingNeighborsLocations.Count);
         }
@@ -55,9 +56,8 @@ namespace GameOfLife.Tests
             Location loc = new Location(0, 0);
 
             world = SetLivingCellsAtLocations(world, loc.GetNeighbors());
-            
-            List<Location> livingNeighborsLocations = world.GetLivingNeighborsLocations(loc);
 
+            List<Location> livingNeighborsLocations = world.GetLivingNeighborsLocations(loc);
 
             Assert.AreEqual(8, livingNeighborsLocations.Count);
         }
@@ -71,9 +71,8 @@ namespace GameOfLife.Tests
             world = SetLivingCellsAtLocations(world, block);
             world.NextGenerationRemainingLivingCells();
 
-
             Dictionary<Location, ICell> nextGenerationDict = world.GetNextGenerationDict();
-            Assert.IsTrue(nextGenerationDict[new Location(0,0)].Equals(new LivingCell()));
+            Assert.IsTrue(nextGenerationDict[new Location(0, 0)].Equals(new LivingCell()));
             Assert.IsTrue(nextGenerationDict[new Location(1, 0)].Equals(new LivingCell()));
             Assert.IsTrue(nextGenerationDict[new Location(1, 1)].Equals(new LivingCell()));
             Assert.IsTrue(nextGenerationDict[new Location(0, 1)].Equals(new LivingCell()));
@@ -97,7 +96,7 @@ namespace GameOfLife.Tests
         public void LivingCellsRemainsAtThreeWithAlternatingPattern()
         {
             World world = new World();
-            List<Location> alternator = new List<Location>() { new Location(0, 0), new Location(0,1), new Location(0,2) };
+            List<Location> alternator = new List<Location>() { new Location(0, 0), new Location(0, 1), new Location(0, 2) };
 
             world = SetLivingCellsAtLocations(world, alternator);
             world.NextGenerationNewLivingCells();
@@ -125,9 +124,25 @@ namespace GameOfLife.Tests
             Assert.IsTrue(world.GetCellAtLocation(new Location(1, 1)).Equals(new LivingCell()));
         }
 
+        [TestMethod]
+        public void IsEmptyIsTrueWhenWorldIsEmpty()
+        {
+            World world = new World();
 
+            Assert.IsTrue(world.IsEmpty());
+        }
 
-        World SetLivingCellsAtLocations(World world, List<Location> locs)
+        [TestMethod]
+        public void IsEmptyIsFalseWhenWorldIsNotEmpty()
+        {
+            World world = new World();
+
+            world.SetLivingCellAtLocation(new Location(0, 0));
+
+            Assert.IsFalse(world.IsEmpty());
+        }
+
+        private World SetLivingCellsAtLocations(World world, List<Location> locs)
         {
             foreach (Location loc in locs)
             {

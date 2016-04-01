@@ -3,9 +3,9 @@
 namespace GameOfLife
 {
     public class World
-	{
-		Dictionary<Location,ICell> livingCellLocationDict =  new Dictionary<Location,ICell>();
-        Dictionary<Location, ICell> nextGenLivingCellLocationDict = new Dictionary<Location, ICell>();
+    {
+        private Dictionary<Location, ICell> livingCellLocationDict = new Dictionary<Location, ICell>();
+        private Dictionary<Location, ICell> nextGenLivingCellLocationDict = new Dictionary<Location, ICell>();
 
         public void Tick()
         {
@@ -14,10 +14,12 @@ namespace GameOfLife
             livingCellLocationDict = nextGenLivingCellLocationDict;
             nextGenLivingCellLocationDict = new Dictionary<Location, ICell>();
         }
-        public Dictionary<Location,ICell> GetLivingCellLocationDict()
+
+        public Dictionary<Location, ICell> GetLivingCellLocationDict()
         {
             return livingCellLocationDict;
         }
+
         public Dictionary<Location, ICell> GetNextGenerationDict()
         {
             return nextGenLivingCellLocationDict;
@@ -30,7 +32,7 @@ namespace GameOfLife
 
         public ICell GetCellAtLocation(int x, int y)
         {
-            return GetCellAtLocation(livingCellLocationDict, new Location(x,y));
+            return GetCellAtLocation(livingCellLocationDict, new Location(x, y));
         }
 
         public void SetLivingCellsAtLocations(List<Location> locs)
@@ -63,8 +65,8 @@ namespace GameOfLife
         }
 
         public List<Location> GetLivingNeighborsLocations(Location location)
-		{
-			List < Location > neighbors = location.GetNeighbors();
+        {
+            List<Location> neighbors = location.GetNeighbors();
             List<Location> livingNeighborCellsLocations = new List<Location>();
             foreach (Location loc in neighbors)
             {
@@ -75,7 +77,12 @@ namespace GameOfLife
                 }
             }
             return livingNeighborCellsLocations;
-		}
+        }
+
+        public bool IsEmpty()
+        {
+            return (livingCellLocationDict.Count == 0);
+        }
 
         public void NextGenerationRemainingLivingCells()
         {
@@ -94,7 +101,7 @@ namespace GameOfLife
             foreach (Location location in livingCellLocationDict.Keys)
             {
                 List<Location> neighbors = location.GetNeighbors();
-                foreach(Location neighborLocation in neighbors)
+                foreach (Location neighborLocation in neighbors)
                 {
                     ICell neighborCell = GetCellAtLocation(neighborLocation);
                     if (!neighborCell.IsAlive())

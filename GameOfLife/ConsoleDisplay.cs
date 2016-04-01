@@ -33,9 +33,14 @@ namespace GameOfLife
             {
                 for (int cols = ShiftX; cols < numCols; cols++)
                 {
-                    grid[rows - ShiftY, cols - ShiftX] = world.GetCellAtLocation(rows ,cols).ToString();
+                    grid[rows - ShiftY, cols - ShiftX] = world.GetCellAtLocation(rows, cols).ToString();
                 }
             }
+        }
+
+        public void DisplayGameOverMessage()
+        {
+            Console.WriteLine("The World is out of living cells, life cannot continue. R.I.P.");
         }
 
         public string[,] GetGrid()
@@ -73,5 +78,4 @@ namespace GameOfLife
             ShiftY++;
         }
     }
-
 }
