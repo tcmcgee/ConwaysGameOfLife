@@ -43,6 +43,11 @@ namespace GameOfLife
             Console.WriteLine("The World is out of living cells, life cannot continue. R.I.P.");
         }
 
+        public void DisplayLivingCellsCount(int remainingLivingCellsCount)
+        {
+            Console.WriteLine("Remaining living cells: " + remainingLivingCellsCount);
+        }
+
         public string[,] GetGrid()
         {
             return grid;

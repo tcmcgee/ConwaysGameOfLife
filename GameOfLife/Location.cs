@@ -6,7 +6,7 @@ namespace GameOfLife
     {
         private int x;
         private int y;
-        
+
         public Location(int x, int y)
         {
             this.x = x;
@@ -16,7 +16,7 @@ namespace GameOfLife
         public int X
         {
             get { return x; }
-        
+
             set { this.x = value; }
         }
 
@@ -26,10 +26,10 @@ namespace GameOfLife
 
             set { this.y = value; }
         }
-        
+
         public List<Location> GetNeighbors()
         {
-            List < Location > neighbors = new List< Location >();
+            List<Location> neighbors = new List<Location>();
             for (int neighborX = -1; neighborX < 2; neighborX++)
             {
                 for (int neighborY = -1; neighborY < 2; neighborY++)
@@ -37,7 +37,7 @@ namespace GameOfLife
                     if (neighborX == 0 && neighborY == 0)
                     { }
                     else
-                    { 
+                    {
                         Location location = new Location(this.x + neighborX, this.y + neighborY);
                         neighbors.Add(location);
                     }

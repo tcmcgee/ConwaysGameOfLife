@@ -5,8 +5,8 @@ namespace GameOfLife.Tests
     [TestClass()]
     public class ConsoleDisplayTests
     {
-        string deadCellString = " ";
-        string livingCellString = "█";
+        private string deadCellString = " ";
+        private string livingCellString = "█";
 
         [TestMethod()]
         public void StringGridHasEmptyCellsByDefault()
@@ -26,7 +26,7 @@ namespace GameOfLife.Tests
             World world = new World();
             ConsoleDisplay consoleDisplay = new ConsoleDisplay();
 
-            world.SetLivingCellAtLocation(new Location(0,0));
+            world.SetLivingCellAtLocation(new Location(0, 0));
             consoleDisplay.GetStringGrid(world);
             string[,] grid = consoleDisplay.GetGrid();
 
@@ -39,7 +39,7 @@ namespace GameOfLife.Tests
             World world = new World();
             ConsoleDisplay consoleDisplay = new ConsoleDisplay();
 
-            world.SetLivingCellAtLocation(new Location(0,0));
+            world.SetLivingCellAtLocation(new Location(0, 0));
             consoleDisplay.GetStringGrid(world);
             consoleDisplay.ShiftGridViewDown();
             string[,] grid = consoleDisplay.GetGrid();

@@ -28,7 +28,7 @@ namespace GameOfLife.Tests
             Location location = new Location(0, 0);
 
             List<Location> neighbors = location.GetNeighbors();
-            List<Location> expectedNeighbors = new List<Location> { new Location(1, 0), new Location(-1, 0), new Location(0, -1), new Location(0, 1), new Location(-1, -1), new Location(1, 1), new Location(-1, 1), new Location(1, -1)};
+            List<Location> expectedNeighbors = new List<Location> { new Location(1, 0), new Location(-1, 0), new Location(0, -1), new Location(0, 1), new Location(-1, -1), new Location(1, 1), new Location(-1, 1), new Location(1, -1) };
 
             Assert.IsTrue(LocationListsAreEqual(neighbors, expectedNeighbors));
         }
@@ -73,10 +73,6 @@ namespace GameOfLife.Tests
             Assert.AreNotEqual(location.GetHashCode(), otherLocation.GetHashCode());
         }
 
-
-
-
-
         public bool LocationListsAreEqual(List<Location> locations1, List<Location> locations2)
         {
             if (locations1.Count != locations2.Count)
@@ -86,7 +82,6 @@ namespace GameOfLife.Tests
             else {
                 foreach (Location location1 in locations1)
                 {
-
                     bool matched = false;
                     foreach (Location location2 in locations2)
                     {
@@ -98,13 +93,11 @@ namespace GameOfLife.Tests
                     }
                     if (matched == false)
                     {
-
                         return false;
                     }
                 }
             }
             return true;
         }
-
     }
 }

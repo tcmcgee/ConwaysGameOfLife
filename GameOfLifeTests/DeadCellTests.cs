@@ -13,6 +13,7 @@ namespace GameOfLife.Tests
 
             Assert.IsFalse(cell.IsAlive());
         }
+
         [TestMethod()]
         public void IsAliveNextGenerationTest()
         {

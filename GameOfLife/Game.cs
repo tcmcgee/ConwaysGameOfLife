@@ -111,17 +111,19 @@ namespace GameOfLife
             {
                 consoleDisplay.GetStringGrid(world);
                 consoleDisplay.DisplayWorld();
+                consoleDisplay.DisplayLivingCellsCount(world.GetLivingCellsCount());
                 world.Tick();
                 Thread.Sleep(800);
             }
 
-            GameOver();
+            GameTearDown();
         }
 
-        private void GameOver()
+        private void GameTearDown()
         {
             consoleDisplay.GetStringGrid(world);
             consoleDisplay.DisplayWorld();
+            consoleDisplay.DisplayLivingCellsCount(world.GetLivingCellsCount());
             consoleDisplay.DisplayGameOverMessage();
             gameOver = true;
         }

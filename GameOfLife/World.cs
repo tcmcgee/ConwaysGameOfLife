@@ -4,35 +4,35 @@ namespace GameOfLife
 {
     public class World
     {
-        private Dictionary<Location, ICell> livingCellLocationDict = new Dictionary<Location, ICell>();
-        private Dictionary<Location, ICell> nextGenLivingCellLocationDict = new Dictionary<Location, ICell>();
+        private HashSet<Location> livingCellLocationSet = new HashSet<Location>();
+        private HashSet<Location> nextGenLivingCellLocationSet = new HashSet<Location>();
 
         public void Tick()
         {
             NextGenerationNewLivingCells();
             NextGenerationRemainingLivingCells();
-            livingCellLocationDict = nextGenLivingCellLocationDict;
-            nextGenLivingCellLocationDict = new Dictionary<Location, ICell>();
+            livingCellLocationSet = nextGenLivingCellLocationSet;
+            nextGenLivingCellLocationSet = new HashSet<Location>();
         }
 
-        public Dictionary<Location, ICell> GetLivingCellLocationDict()
+        public HashSet<Location> GetLivingCellLocationSet()
         {
-            return livingCellLocationDict;
+            return livingCellLocationSet;
         }
 
-        public Dictionary<Location, ICell> GetNextGenerationDict()
+        public HashSet<Location> GetNextGenerationSet()
         {
-            return nextGenLivingCellLocationDict;
+            return nextGenLivingCellLocationSet;
         }
 
         public ICell GetCellAtLocation(Location loc)
         {
-            return GetCellAtLocation(livingCellLocationDict, loc);
+            return GetCellAtLocation(livingCellLocationSet, loc);
         }
 
         public ICell GetCellAtLocation(int x, int y)
         {
-            return GetCellAtLocation(livingCellLocationDict, new Location(x, y));
+            return GetCellAtLocation(livingCellLocationSet, new Location(x, y));
         }
 
         public void SetLivingCellsAtLocations(List<Location> locs)
@@ -43,25 +43,26 @@ namespace GameOfLife
             }
         }
 
-        public ICell GetCellAtLocation(Dictionary<Location, ICell> livingCellDict, Location location)
+        public ICell GetCellAtLocation(HashSet<Location> livingCellSet, Location location)
         {
-            ICell cell;
-            bool found = livingCellDict.TryGetValue(location, out cell);
-            if (!found)
+            if (livingCellSet.Contains(location))
             {
-                cell = new DeadCell();
+                return new LivingCell();
             }
-            return cell;
+            else
+            {
+                return new DeadCell();
+            }
         }
 
         public void SetLivingCellAtLocation(Location loc)
         {
-            SetLivingCellAtLocation(livingCellLocationDict, loc);
+            SetLivingCellAtLocation(livingCellLocationSet, loc);
         }
 
-        public void SetLivingCellAtLocation(Dictionary<Location, ICell> livingLocationDict, Location loc)
+        public void SetLivingCellAtLocation(HashSet<Location> livingLocationDict, Location loc)
         {
-            livingLocationDict[loc] = new LivingCell();
+            livingLocationDict.Add(loc);
         }
 
         public List<Location> GetLivingNeighborsLocations(Location location)
@@ -79,26 +80,31 @@ namespace GameOfLife
             return livingNeighborCellsLocations;
         }
 
+        public int GetLivingCellsCount()
+        {
+            return livingCellLocationSet.Count;
+        }
+
         public bool IsEmpty()
         {
-            return (livingCellLocationDict.Count == 0);
+            return (GetLivingCellsCount() == 0);
         }
 
         public void NextGenerationRemainingLivingCells()
         {
-            foreach (Location livingCellLocation in livingCellLocationDict.Keys)
+            foreach (Location livingCellLocation in livingCellLocationSet)
             {
                 List<Location> livingNeighborsLocations = GetLivingNeighborsLocations(livingCellLocation);
                 if (GetCellAtLocation(livingCellLocation).IsAliveNextGeneration(livingNeighborsLocations))
                 {
-                    nextGenLivingCellLocationDict[livingCellLocation] = new LivingCell();
+                    nextGenLivingCellLocationSet.Add(livingCellLocation);
                 }
             }
         }
 
         public void NextGenerationNewLivingCells()
         {
-            foreach (Location location in livingCellLocationDict.Keys)
+            foreach (Location location in livingCellLocationSet)
             {
                 List<Location> neighbors = location.GetNeighbors();
                 foreach (Location neighborLocation in neighbors)
@@ -108,7 +114,7 @@ namespace GameOfLife
                     {
                         if (neighborCell.IsAliveNextGeneration(GetLivingNeighborsLocations(neighborLocation)))
                         {
-                            SetLivingCellAtLocation(nextGenLivingCellLocationDict, neighborLocation);
+                            SetLivingCellAtLocation(nextGenLivingCellLocationSet, neighborLocation);
                         }
                     }
                 }

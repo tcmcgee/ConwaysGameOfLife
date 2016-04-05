@@ -71,11 +71,11 @@ namespace GameOfLife.Tests
             world = SetLivingCellsAtLocations(world, block);
             world.NextGenerationRemainingLivingCells();
 
-            Dictionary<Location, ICell> nextGenerationDict = world.GetNextGenerationDict();
-            Assert.IsTrue(nextGenerationDict[new Location(0, 0)].Equals(new LivingCell()));
-            Assert.IsTrue(nextGenerationDict[new Location(1, 0)].Equals(new LivingCell()));
-            Assert.IsTrue(nextGenerationDict[new Location(1, 1)].Equals(new LivingCell()));
-            Assert.IsTrue(nextGenerationDict[new Location(0, 1)].Equals(new LivingCell()));
+            HashSet<Location> nextGenerationDict = world.GetNextGenerationSet();
+            Assert.IsTrue(nextGenerationDict.Contains(new Location(0, 0)));
+            Assert.IsTrue(nextGenerationDict.Contains(new Location(1, 0)));
+            Assert.IsTrue(nextGenerationDict.Contains(new Location(1, 1)));
+            Assert.IsTrue(nextGenerationDict.Contains(new Location(0, 1)));
         }
 
         [TestMethod()]
@@ -87,7 +87,7 @@ namespace GameOfLife.Tests
             world = SetLivingCellsAtLocations(world, birther);
             world.NextGenerationNewLivingCells();
 
-            Dictionary<Location, ICell> nextGenerationDict = world.GetNextGenerationDict();
+            HashSet<Location> nextGenerationDict = world.GetNextGenerationSet();
             Assert.AreEqual(1, nextGenerationDict.Count);
             Assert.IsTrue(world.GetCellAtLocation(nextGenerationDict, new Location(1, 1)).Equals(new LivingCell()));
         }
@@ -102,7 +102,7 @@ namespace GameOfLife.Tests
             world.NextGenerationNewLivingCells();
             world.NextGenerationRemainingLivingCells();
 
-            Dictionary<Location, ICell> nextGenerationDict = world.GetNextGenerationDict();
+            HashSet<Location> nextGenerationDict = world.GetNextGenerationSet();
 
             Assert.AreEqual(3, nextGenerationDict.Count);
             Assert.IsTrue(world.GetCellAtLocation(nextGenerationDict, new Location(-1, 1)).Equals(new LivingCell()));

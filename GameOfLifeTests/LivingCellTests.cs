@@ -13,20 +13,21 @@ namespace GameOfLife.Tests
 
             Assert.IsTrue(cell.IsAlive());
         }
+
         [TestMethod()]
         public void IsAliveNextGenerationTest()
         {
             LivingCell livingCell = new LivingCell();
-            List<Location> livingNeighbors = new List<Location> { new Location(0,0), new Location(1,1), new Location(3,3)};
+            List<Location> livingNeighbors = new List<Location> { new Location(0, 0), new Location(1, 1), new Location(3, 3) };
 
-            Assert.IsTrue(livingCell.IsAliveNextGeneration(livingNeighbors));    
+            Assert.IsTrue(livingCell.IsAliveNextGeneration(livingNeighbors));
         }
 
         [TestMethod()]
         public void IsNotAliveNextGenerationTest()
         {
             LivingCell livingCell = new LivingCell();
-            List<Location> livingNeighbors = new List<Location> { new Location(0,0), new Location(0, 0), new Location(0, 0), new Location(0, 0) };
+            List<Location> livingNeighbors = new List<Location> { new Location(0, 0), new Location(0, 0), new Location(0, 0), new Location(0, 0) };
 
             Assert.IsFalse(livingCell.IsAliveNextGeneration(livingNeighbors));
         }
