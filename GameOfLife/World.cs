@@ -60,9 +60,9 @@ namespace GameOfLife
             SetLivingCellAtLocation(livingCellLocationSet, loc);
         }
 
-        public void SetLivingCellAtLocation(HashSet<Location> livingLocationDict, Location loc)
+        public void SetLivingCellAtLocation(HashSet<Location> livingLocationSet, Location loc)
         {
-            livingLocationDict.Add(loc);
+            livingLocationSet.Add(loc);
         }
 
         public List<Location> GetLivingNeighborsLocations(Location location)

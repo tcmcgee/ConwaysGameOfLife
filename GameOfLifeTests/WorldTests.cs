@@ -71,11 +71,11 @@ namespace GameOfLife.Tests
             world = SetLivingCellsAtLocations(world, block);
             world.NextGenerationRemainingLivingCells();
 
-            HashSet<Location> nextGenerationDict = world.GetNextGenerationSet();
-            Assert.IsTrue(nextGenerationDict.Contains(new Location(0, 0)));
-            Assert.IsTrue(nextGenerationDict.Contains(new Location(1, 0)));
-            Assert.IsTrue(nextGenerationDict.Contains(new Location(1, 1)));
-            Assert.IsTrue(nextGenerationDict.Contains(new Location(0, 1)));
+            HashSet<Location> nextGenerationSet = world.GetNextGenerationSet();
+            Assert.IsTrue(nextGenerationSet.Contains(new Location(0, 0)));
+            Assert.IsTrue(nextGenerationSet.Contains(new Location(1, 0)));
+            Assert.IsTrue(nextGenerationSet.Contains(new Location(1, 1)));
+            Assert.IsTrue(nextGenerationSet.Contains(new Location(0, 1)));
         }
 
         [TestMethod()]
@@ -87,9 +87,9 @@ namespace GameOfLife.Tests
             world = SetLivingCellsAtLocations(world, birther);
             world.NextGenerationNewLivingCells();
 
-            HashSet<Location> nextGenerationDict = world.GetNextGenerationSet();
-            Assert.AreEqual(1, nextGenerationDict.Count);
-            Assert.IsTrue(world.GetCellAtLocation(nextGenerationDict, new Location(1, 1)).Equals(new LivingCell()));
+            HashSet<Location> nextGenerationSet = world.GetNextGenerationSet();
+            Assert.AreEqual(1, nextGenerationSet.Count);
+            Assert.IsTrue(world.GetCellAtLocation(nextGenerationSet, new Location(1, 1)).Equals(new LivingCell()));
         }
 
         [TestMethod()]
@@ -102,12 +102,12 @@ namespace GameOfLife.Tests
             world.NextGenerationNewLivingCells();
             world.NextGenerationRemainingLivingCells();
 
-            HashSet<Location> nextGenerationDict = world.GetNextGenerationSet();
+            HashSet<Location> nextGenerationSet = world.GetNextGenerationSet();
 
-            Assert.AreEqual(3, nextGenerationDict.Count);
-            Assert.IsTrue(world.GetCellAtLocation(nextGenerationDict, new Location(-1, 1)).Equals(new LivingCell()));
-            Assert.IsTrue(world.GetCellAtLocation(nextGenerationDict, new Location(0, 1)).Equals(new LivingCell()));
-            Assert.IsTrue(world.GetCellAtLocation(nextGenerationDict, new Location(1, 1)).Equals(new LivingCell()));
+            Assert.AreEqual(3, nextGenerationSet.Count);
+            Assert.IsTrue(world.GetCellAtLocation(nextGenerationSet, new Location(-1, 1)).Equals(new LivingCell()));
+            Assert.IsTrue(world.GetCellAtLocation(nextGenerationSet, new Location(0, 1)).Equals(new LivingCell()));
+            Assert.IsTrue(world.GetCellAtLocation(nextGenerationSet, new Location(1, 1)).Equals(new LivingCell()));
         }
 
         [TestMethod]
